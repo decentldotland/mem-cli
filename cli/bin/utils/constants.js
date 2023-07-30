@@ -1,0 +1,1 @@
+export const TXS_BROADCASTER_URL = `http://localhost:3000/mem-cli`;
