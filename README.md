@@ -19,7 +19,7 @@ npm install && npm run server
 ## Install the CLI
 
 ```bash
-npm i -g mem-cli
+npm i -g mem-cli-js
 ```
 
 ## CLI Commands
