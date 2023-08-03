@@ -1,6 +1,6 @@
 {
   "name": "mem-cli-js",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "CLI for the MEM protocol",
   "type": "module",
   "main": "./cli/bin/cli.js",
