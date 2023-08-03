@@ -4,6 +4,7 @@ import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { initer } from "./initer.js";
 import { deployFunction } from "./handlers/deploy.js";
+import { writeFunction } from "./handlers/write.js";
 
 const argvs = yargs(hideBin(process.argv))
   .command({
@@ -22,6 +23,24 @@ const argvs = yargs(hideBin(process.argv))
     },
     handler: async (argv) => {
       await deployFunction(argv);
+    },
+  })
+  .command({
+    command: "write [function-id] [inputs]",
+    builder: (yargs) => {
+      yargs.options({
+        "function-id": {
+          describe: "your MEM function/contract ID",
+          demandOption: true,
+        },
+        "inputs": {
+          describe: "the contract interaction stringified inputs object",
+          demandOption: true,
+        },
+      });
+    },
+    handler: async (argv) => {
+      await writeFunction(argv);
     },
   })
   .command({
