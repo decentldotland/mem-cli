@@ -39,7 +39,7 @@ mem deploy --src ./contract.js --init-state '{"logs": []}'
 ### Write to a smart contract (serverless function):
 
 ```bash
-mem write --functionId [MEM function/contract ID] --init-state [the contract interaction stringified inputs object]
+mem write --functionId [MEM function/contract ID] --inputs [the contract interaction stringified inputs object]
 ```
 
 ## License
