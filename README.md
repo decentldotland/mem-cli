@@ -36,5 +36,11 @@ mem deploy --src [path-to-source-code] --init-state [stringified-initial-state]
 mem deploy --src ./contract.js --init-state '{"logs": []}'
 ```
 
+### Write to a smart contract (serverless function):
+
+```bash
+mem write --functionId [MEM function/contract ID] --init-state [the contract interaction stringified inputs object]
+```
+
 ## License
 This project is licensed under the [MIT License](./LICENSE)

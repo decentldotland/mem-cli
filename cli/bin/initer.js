@@ -8,8 +8,9 @@ export async function initer() {
       return;
     }
     console.log(data);
-    console.log(`[*] developed by: decent.land`);
-    console.log(`[*] github: https://github.com/decentldotland/mem-cli`);
+    console.log(`[*] Developed by: decent.land`);
+    console.log(`[*] Github: https://github.com/decentldotland/mem-cli`);
+    console.log(`[*] Docs: https://docs.mem.tech`);
     console.log(`[*] Twitter: @mem_tech \n\n`);
   });
 }
