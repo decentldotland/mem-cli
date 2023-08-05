@@ -1,10 +1,20 @@
 import { readFileAsStringSync } from "./read-sc.js";
+import { isJson } from "./verifiers.js";
 
 export async function generateSourceCode(filePath, stringifiedState) {
   try {
-    JSON.parse(stringifiedState);
+    if (!isJson(stringifiedState)) {
+      console.error(
+        `⚠️ Error: provide a valid stringified JSON object for state ⚠️`,
+      );
+      return { dataTx: null, tags: null };
+    }
 
     const { sc, mimeType } = readFileAsStringSync(filePath);
+
+    if (!sc || !mimeType) {
+      return { dataTx: null, tags: null };
+    }
     const sourceCode = sc.split("").map((char) => char.charCodeAt(0));
 
     const dataTx = {
@@ -26,5 +36,6 @@ export async function generateSourceCode(filePath, stringifiedState) {
     return { dataTx, tags };
   } catch (error) {
     console.log(error);
+    return { dataTx: null, tags: null };
   }
 }
