@@ -1,13 +1,17 @@
-import { genNodeAPI } from "arseeding-js";
+import Bundlr from "@bundlr-network/client";
 import dotenv from "dotenv";
 dotenv.config();
 
+const bundlr = new Bundlr.default(
+  "https://node1.bundlr.network",
+  "ethereum",
+  process.env.PRIVATE_KEY,
+);
+
 export async function archive(input) {
   try {
-    const instance = await genNodeAPI(process.env.PRIVATE_KEY);
-    const arseedUrl = "https://arseed.web3infra.dev";
     const data = Buffer.from(JSON.stringify(input.dataTx));
-    const payCurrency = "eth";
+
     const tags = [
       { name: "Content-Type", value: input.dataTx.contentType },
       { name: "Owner", value: "" },
@@ -17,11 +21,11 @@ export async function archive(input) {
       { name: "Size", value: String(input.dataTx.contractSrc.length) },
     ];
 
-    const ops = {
-      tags: input.tags,
-    };
-    const tx = await instance.sendAndPay(arseedUrl, data, payCurrency, ops);
-    return tx?.order?.itemId;
+    const transaction = await bundlr.createTransaction(data, { tags: tags });
+    await transaction.sign();
+    await transaction.upload();
+
+    return transaction.id;
   } catch (error) {
     console.log(error);
     return false;

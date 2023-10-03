@@ -18,7 +18,7 @@ export async function deployFunction(argv) {
 
     > Contract ID: ${txid}
 
-    > Arweave TXID: https://arseed.web3infra.dev/${txid}
+    > Arweave TXID: https://arweave.net/${txid}
     `;
 
       const box = Box("3x3", {
