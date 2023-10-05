@@ -27,7 +27,7 @@ npm i -g mem-cli-js
 ### Deploy smart contract (serverless function):
 
 ```bash
-mem deploy --src [path-to-source-code] --init-state [stringified-initial-state]
+mem deploy --src [path-to-source-code] --init-state [stringified-initial-state || path-to-state.json]
 ```
 
 #### Example
