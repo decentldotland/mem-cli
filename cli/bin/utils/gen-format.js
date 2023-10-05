@@ -3,11 +3,20 @@ import { isJson } from "./verifiers.js";
 
 export async function generateSourceCode(filePath, stringifiedState) {
   try {
-    if (!isJson(stringifiedState)) {
-      console.error(
-        `⚠️ Error: provide a valid stringified JSON object for state ⚠️`,
+    let state;
+    if (stringifiedState.endsWith(".json")) {
+      state = JSON.stringify(
+        JSON.parse(readFileAsStringSync(stringifiedState).sc),
       );
-      return { dataTx: null, tags: null };
+    } else {
+      if (!isJson(stringifiedState)) {
+        console.error(
+          `⚠️ Error: provide a valid stringified JSON object for state ⚠️`,
+        );
+        return { dataTx: null, tags: null };
+      }
+
+      state = stringifiedState;
     }
 
     const { sc, mimeType } = readFileAsStringSync(filePath);
@@ -21,7 +30,7 @@ export async function generateSourceCode(filePath, stringifiedState) {
       contractOwner: "",
       contentType: mimeType,
       contractSrc: sourceCode,
-      initState: stringifiedState,
+      initState: state,
     };
 
     const tags = [
