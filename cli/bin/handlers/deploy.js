@@ -5,7 +5,7 @@ import Box from "cli-box";
 export async function deployFunction(argv) {
   try {
     const { src, initState } = argv;
-    const data = await generateSourceCode(src, initState);
+    const data = await generateSourceCode(src, initState[1]);
 
     if (!data.dataTx) {
       return;
