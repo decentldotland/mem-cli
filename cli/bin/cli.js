@@ -3,44 +3,52 @@
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { initer } from "./initer.js";
-import { deployFunction } from "./handlers/deploy.js";
-import { writeFunction } from "./handlers/write.js";
+import { handleDeployFunction } from "./handlers/deploy.js";
+import { handleWriteFunction } from "./handlers/write.js";
 
 const argvs = yargs(hideBin(process.argv))
   .command({
-    command: "deploy [src] [init-state]",
+    command: "deploy [src] [init-state] [testnet]",
     builder: (yargs) => {
       yargs.options({
         src: {
-          describe: "path to the contract source code",
+          describe: "path to the function source code",
           demandOption: true,
         },
         "init-state": {
-          describe: "A stringified initial state for the contract",
+          describe: "A stringified initial state for the function",
           demandOption: true,
+        },
+        "testnet": {
+          describe: "optional to deploy the function on MEM Carbon testnet",
+          demandOption: false,
         },
       });
     },
     handler: async (argv) => {
-      await deployFunction(argv);
+      await handleDeployFunction(argv);
     },
   })
   .command({
-    command: "write [function-id] [inputs]",
+    command: "write [function-id] [inputs] [testnet]",
     builder: (yargs) => {
       yargs.options({
         "function-id": {
-          describe: "your MEM function/contract ID",
+          describe: "your MEM function ID",
           demandOption: true,
         },
         "inputs": {
-          describe: "the contract interaction stringified inputs object",
+          describe: "the function interaction stringified inputs object",
           demandOption: true,
+        },
+        "testnet": {
+          describe: "optional to write the interaction on MEM Carbon testnet",
+          demandOption: false,
         },
       });
     },
     handler: async (argv) => {
-      await writeFunction(argv);
+      await handleWriteFunction(argv);
     },
   })
   .command({
