@@ -1,7 +1,42 @@
 import axios from "axios";
 import Box from "cli-box";
 
-export async function writeFunction(argv) {
+export async function handleWriteFunction(argv) {
+  const { inputs, functionId, testnet } = argv;
+
+  if (testnet) {
+    await writeFunctionTestnet(argv);
+    return;
+  }
+
+  await writeFunctionMainnet(argv);
+}
+
+export async function writeFunctionTestnet(argv) {
+  try {
+    const { inputs, functionId, testnet } = argv;
+    JSON.parse(inputs);
+
+    const body = {
+      input: inputs,
+      function_id: functionId,
+    };
+
+    const result = (await axios.post("https://mem-testnet.xyz/write", body))
+      ?.data;
+
+    console.log(`⚡️ MEM Carbon transaction sent successfully ⚡️\n`);
+    console.log(result);
+
+    return result;
+  } catch (error) {
+    console.log(error);
+    console.log(`⚠️ Error posting function interaction ⚠️`);
+    return false;
+  }
+}
+
+export async function writeFunctionMainnet(argv) {
   try {
     // later TODO when mem-core is open-sourced:
     // add a check WL'd functions validity. Read
@@ -44,9 +79,7 @@ export async function writeFunction(argv) {
       console.log(box);
       return req?.data;
     } else {
-      console.error(
-        `⚠️ Error posting contract interaction with ${functionId} ⚠️`,
-      );
+      console.error(`⚠️ Error posting function interaction ⚠️`);
     }
   } catch (error) {
     console.log(error);
