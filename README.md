@@ -24,22 +24,22 @@ npm i -g mem-cli-js
 
 ## CLI Commands
 
-### Deploy smart contract (serverless function):
+### Deploy a MEM serverless function:
 
 ```bash
-mem deploy --src [path-to-source-code] --init-state [stringified-initial-state || path-to-state.json]
+mem deploy --src [path-to-source-code] --init-state [stringified-initial-state || ./path-to-state.json] --testnet [optional to deploy on MEM Carbon testnet]
 ```
 
 #### Example
 
 ```bash
-mem deploy --src ./contract.js --init-state '{"logs": []}'
+mem deploy --src ./function.js --init-state '{"logs": []}'
 ```
 
-### Write to a smart contract (serverless function):
+### Write to a MEM serverless function:
 
 ```bash
-mem write --functionId [MEM function/contract ID] --inputs [the contract interaction stringified inputs object]
+mem write --functionId [MEM function ID] --inputs [the contract interaction stringified inputs object] --testnet [optional to write to a MEM Carbon function]
 ```
 
 ## License
