@@ -42,5 +42,11 @@ mem deploy --src ./function.js --init-state '{"logs": []}'
 mem write --functionId [MEM function ID] --inputs [the contract interaction stringified inputs object] --testnet [optional to write to a MEM Carbon function]
 ```
 
+#### Example
+
+```bash
+mem write --function-id e695edc7-4919-0a1d-3d99-b725661904ad --inputs '{"function":"increment"}'
+```
+
 ## License
 This project is licensed under the [MIT License](./LICENSE)
