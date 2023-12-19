@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const bundlr = new Bundlr.default(
-  "https://node1.bundlr.network",
+  "https://up.arweave.net",
   "ethereum",
   process.env.PRIVATE_KEY,
 );
